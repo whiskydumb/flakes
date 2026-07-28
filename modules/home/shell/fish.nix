@@ -23,12 +23,6 @@ in
       cleanup = "sudo nix-collect-garbage -d; and nix-collect-garbage -d";
     };
 
-    loginShellInit = ''
-      if test (tty) = /dev/tty1
-        exec niri-session
-      end
-    '';
-
     interactiveShellInit = ''
       set fish_greeting
       fish_vi_key_bindings

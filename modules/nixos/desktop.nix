@@ -5,7 +5,6 @@ in
 {
   config = lib.mkIf config.settings.desktop.enable {
     programs.niri.enable = true;
-
     programs.niri.useNautilus = false;
 
     environment.systemPackages = [ pkgs.xwayland-satellite ];
@@ -31,6 +30,18 @@ in
 
     services.blueman.enable = true;
 
-    services.getty.autologinUser = user;
+    services.greetd = {
+      enable = true;
+      settings = {
+        initial_session = {
+          command = "niri-session";
+          user = user;
+        };
+        default_session = {
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --cmd niri-session";
+          user = "greeter";
+        };
+      };
+    };
   };
 }

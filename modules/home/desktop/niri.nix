@@ -25,7 +25,6 @@ lib.mkIf osConfig.settings.desktop.enable {
 
     output "DP-2" {
         mode "3440x1440@180.000"
-        variable-refresh-rate
         position x=0 y=0
     }
 
