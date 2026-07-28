@@ -23,11 +23,14 @@ lib.mkIf osConfig.settings.desktop.enable {
         focus-follows-mouse max-scroll-amount="0%"
     }
 
-    output "DP-1" {
+    output "DP-2" {
+        mode "3440x1440@180.000"
+        variable-refresh-rate
         position x=0 y=0
     }
 
-    output "DP-2" {
+    output "HDMI-A-1" {
+        mode "1920x1080@75.002"
         position x=-1920 y=180
     }
 
