@@ -14,6 +14,12 @@
     SSH_ASKPASS_REQUIRE = "prefer";
   };
 
+  programs.ssh = {
+    enable = true;
+    enableDefaultConfig = false;
+    settings."*".addKeysToAgent = "yes";
+  };
+
   programs.bat.enable = true;
 
   programs.eza = {
