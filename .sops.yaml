@@ -1,9 +1,10 @@
 keys:
-  - &admin  #age1
-  # - &mochi age1...
+  - &admin age1yyau5mmqq06pf52qcqxw4pq8ag0ajkxgn4ng0cuge3v2a7p3sy0sdyv5df
+  - &mochi age1kcwx0uwpdlrmuy55sq3062cm3xnhvrm08vk5hg5nlzcqfqqvm5ps74jker
 
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
     key_groups:
       - age:
           - *admin
+          - *mochi

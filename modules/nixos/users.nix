@@ -5,7 +5,7 @@ in
 {
   programs.fish.enable = true;
 
-  # users.mutableUsers = false;
+  users.mutableUsers = false;
 
   users.users.${user} = {
     isNormalUser = true;
@@ -19,6 +19,6 @@ in
       "docker"
     ];
     shell = pkgs.fish;
-    # hashedPasswordFile = config.sops.secrets."passwords/${user}".path;
+    hashedPasswordFile = config.sops.secrets."passwords/${user}".path;
   };
 }
