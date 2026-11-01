@@ -1,0 +1,9 @@
+/result
+/result-*
+/.direnv/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.agekey

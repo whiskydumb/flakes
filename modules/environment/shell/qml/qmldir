@@ -1,0 +1,12 @@
+singleton Theme 1.0 Theme.qml
+singleton Notices 1.0 Notices.qml
+SideBar 1.0 SideBar.qml
+Details 1.0 Details.qml
+PanelButton 1.0 PanelButton.qml
+HoverHint 1.0 HoverHint.qml
+ActionButton 1.0 ActionButton.qml
+Toggle 1.0 Toggle.qml
+LevelSlider 1.0 LevelSlider.qml
+AudioControl 1.0 AudioControl.qml
+TrayMenu 1.0 TrayMenu.qml
+SessionControls 1.0 SessionControls.qml
