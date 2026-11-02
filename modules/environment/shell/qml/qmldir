@@ -1,5 +1,6 @@
 singleton Theme 1.0 Theme.qml
 singleton Notices 1.0 Notices.qml
+Background 1.0 Background.qml
 SideBar 1.0 SideBar.qml
 Details 1.0 Details.qml
 PanelButton 1.0 PanelButton.qml

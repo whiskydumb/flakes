@@ -1,5 +1,7 @@
 {
   imports = [
+    ../../apps/home.nix
+    ../../modules/environment/terminal/shell.nix
     ../../modules/environment/hyprland/home.nix
     ../../modules/environment/lock/home.nix
     ../../modules/environment/shell/home.nix

@@ -1,5 +1,6 @@
 {
   imports = [
+    ../apps/gaming.nix
     ./base.nix
     ../modules/networking/networkmanager.nix
     ../modules/environment/hyprland/nixos.nix

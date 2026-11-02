@@ -1,0 +1,78 @@
+{
+  "theme": "Nocturne Dark",
+  "icon_theme": "Catppuccin Macchiato",
+  "ui_font_size": 16,
+  "buffer_font_size": 16.0,
+  "buffer_font_family": "Iosevka Nerd Font Mono",
+  "text_rendering_mode": "platform_default",
+  "relative_line_numbers": "enabled",
+  "show_wrap_guides": false,
+  "gutter": {
+    "bookmarks": true,
+    "line_numbers": true
+  },
+  "autosave": {
+    "after_delay": {
+      "milliseconds": 2000
+    }
+  },
+  "search": {
+    "regex": true
+  },
+  "tabs": {
+    "git_status": false
+  },
+  "tab_bar": {
+    "show": false
+  },
+  "title_bar": {
+    "show_menus": false,
+    "show_branch_name": false,
+    "show_worktree_name": false,
+    "show_project_items": false,
+    "show_onboarding_banner": false,
+    "show_sign_in": false,
+    "show_user_menu": false,
+    "show_user_picture": false,
+    "show_branch_status_icon": false
+  },
+  "toolbar": {
+    "selections_menu": false,
+    "agent_review": false,
+    "quick_actions": false,
+    "breadcrumbs": false
+  },
+  "project_panel": {
+    "button": true
+  },
+  "git_panel": {
+    "button": true
+  },
+  "outline_panel": {
+    "button": false
+  },
+  "collaboration_panel": {
+    "button": false
+  },
+  "terminal": {
+    "minimum_contrast": 0.0,
+    "max_scroll_history_lines": 100000,
+    "working_directory": "current_project_directory",
+    "shell": {
+      "program": "fish"
+    },
+    "font_size": 14.0,
+    "font_family": "IosevkaTerm Nerd Font Mono"
+  },
+  "debugger": {
+    "timeout": 3000
+  },
+  "disable_ai": true,
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+    "anthropic_retention": false
+  },
+  "diff_view_style": "split",
+  "cli_default_open_behavior": "existing_window"
+}

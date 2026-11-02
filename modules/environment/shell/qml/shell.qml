@@ -3,6 +3,8 @@ import QtQuick
 import Quickshell
 
 Scope {
+    Background {}
+
     Variants {
         model: Quickshell.screens
         SideBar {

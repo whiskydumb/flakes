@@ -15,6 +15,7 @@ in
       cp -r ${./qml} "$out"
       chmod -R u+w "$out"
       cp ${theme} "$out/Theme.qml"
+      ln -s ${../appearance/wallpaper.png} "$out/wallpaper.png"
     '';
     systemd = {
       enable = true;

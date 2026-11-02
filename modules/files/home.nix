@@ -27,6 +27,7 @@ let
       pkgs.nautilus;
 in
 {
+  imports = [ ./associations.nix ];
   home.packages = [ files ];
   dconf.settings = {
     "org/gnome/desktop/interface".color-scheme = "prefer-dark";
@@ -37,10 +38,6 @@ in
       click-policy = "double";
     };
     "org/gnome/nautilus/list-view".use-tree-view = true;
-  };
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications."inode/directory" = [ "org.gnome.Nautilus.desktop" ];
   };
   wayland.windowManager.hyprland.extraConfig = lib.mkAfter ''
     hl.bind("SUPER + E", hl.dsp.exec_cmd("uwsm app -- nautilus"))

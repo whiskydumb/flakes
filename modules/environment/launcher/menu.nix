@@ -46,6 +46,7 @@
     raycast-compat.entrypoints.store.enabled = false;
 
     applications.entrypoints.cups.enabled = false;
+    applications.entrypoints.btop.enabled = false;
     applications.entrypoints.qt5ct.enabled = false;
     applications.entrypoints.qt6ct.enabled = false;
     applications.entrypoints.blueman-manager.enabled = false;
