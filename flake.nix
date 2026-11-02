@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -44,17 +48,38 @@
         };
       };
 
-      nixosConfigurations = nixpkgs.lib.optionalAttrs (builtins.pathExists ./hosts/vm/default.nix) {
-        vm = nixpkgs.lib.nixosSystem {
+      nixosConfigurations =
+        (nixpkgs.lib.optionalAttrs (builtins.pathExists ./hosts/mochi/default.nix) {
+          mochi = nixpkgs.lib.nixosSystem {
+            modules = [
+              home-manager.nixosModules.home-manager
+              inputs.disko.nixosModules.disko
+              self.nixosModules.whisky
+              ./hosts/mochi
+            ];
+          };
+        })
+        // nixpkgs.lib.optionalAttrs (builtins.pathExists ./hosts/vm/default.nix) {
+          vm = nixpkgs.lib.nixosSystem {
+            modules = [
+              home-manager.nixosModules.home-manager
+              self.nixosModules.whisky
+              ./hosts/vm
+            ];
+          };
+        };
+
+      formatter.${system} = pkgs.nixfmt-tree;
+
+      checks.${system}.workstation =
+        (nixpkgs.lib.nixosSystem {
           modules = [
             home-manager.nixosModules.home-manager
             self.nixosModules.whisky
-            ./hosts/vm
+            ./profiles/workstation.nix
+            ./ci/workstation.nix
           ];
-        };
-      };
-
-      formatter.${system} = pkgs.nixfmt-tree;
+        }).config.system.build.toplevel;
 
       devShells.${system} =
         (import ./dev {
@@ -70,6 +95,7 @@
               pkgs.git
               pkgs.just
               pkgs.nixfmt-tree
+              pkgs.actionlint
             ];
           };
         };

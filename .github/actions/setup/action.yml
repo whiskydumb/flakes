@@ -1,0 +1,10 @@
+name: Setup Lix
+description: Install Lix for flake checks and builds
+runs:
+  using: composite
+  steps:
+    - uses: samueldr/lix-gha-installer-action@38852f089fdd2f5aabeec42c59c8d180bb8a15e9
+      with:
+        extra_nix_config: |
+          experimental-features = nix-command flakes
+          accept-flake-config = false

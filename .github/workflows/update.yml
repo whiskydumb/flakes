@@ -1,0 +1,45 @@
+name: Update inputs
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: update-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup
+      - name: Update lockfile
+        run: nix flake update
+      - name: Validate updated inputs
+        run: |
+          set -euo pipefail
+          cp flake.lock "$RUNNER_TEMP/flake.lock.updated"
+          nix develop --no-update-lock-file -c actionlint
+          nix develop --no-update-lock-file -c just check
+          cmp flake.lock "$RUNNER_TEMP/flake.lock.updated"
+      - name: Open update PR
+        uses: peter-evans/create-pull-request@22a9089034f40e5a961c8808d113e2c98fb63676
+        with:
+          add-paths: flake.lock
+          branch: automation/flake-update-${{ github.ref_name }}
+          base: ${{ github.ref_name }}
+          commit-message: 'chore: update flake inputs'
+          title: 'chore: update flake inputs'
+          body: |
+            Updates flake.lock. Workflow lint and flake evaluation passed before creating this PR.
+            Evaluation includes the generic workstation and any committed hosts, but does not build or boot the system.
+            Review and merge manually. Approve PR workflow runs if GitHub requests it.

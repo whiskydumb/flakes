@@ -1,0 +1,32 @@
+name: Build mochi
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-mochi-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Require committed host
+        run: |
+          set -euo pipefail
+          if [[ ! -f hosts/mochi/default.nix ]]; then
+            printf '::error::Commit hosts/mochi before running its build workflow.\n'
+            exit 1
+          fi
+      - uses: ./.github/actions/setup
+      - name: Validate
+        run: nix develop --no-update-lock-file -c bash ci/check.sh
+      - name: Build system without activation
+        run: nix develop --no-update-lock-file -c just build mochi
