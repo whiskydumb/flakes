@@ -17,6 +17,33 @@
         la = "eza --long --all --header --git --icons --group-directories-first";
         lt = "eza --tree --level=2 --icons --group-directories-first";
       };
+      functions.dev = {
+        description = "Enter a development shell";
+        body = ''
+          if test (count $argv) -ne 1
+            printf 'Usage: dev <cpp|node|rust|rust-windows>\n' >&2
+            return 2
+          end
+
+          switch $argv[1]
+            case cpp node rust rust-windows
+            case '*'
+              printf 'Unknown development shell: %s\n' "$argv[1]" >&2
+              return 2
+          end
+
+          set -l flake_dir "$HOME/Projects/nix-config"
+          if set -q NIX_DEV_FLAKE_DIR
+            set flake_dir "$NIX_DEV_FLAKE_DIR"
+          end
+          if not test -f "$flake_dir/flake.nix"
+            printf 'Flake not found in %s. Set NIX_DEV_FLAKE_DIR to your nix-config directory.\n' "$flake_dir" >&2
+            return 1
+          end
+
+          command nix develop "path:$flake_dir#$argv[1]" -c fish
+        '';
+      };
     };
     gh.enable = true;
     bat.enable = true;
@@ -52,4 +79,7 @@
       };
     };
   };
+  xdg.configFile."fish/completions/dev.fish".text = ''
+    complete -c dev -f -n '__fish_is_first_arg' -a 'cpp node rust rust-windows'
+  '';
 }
